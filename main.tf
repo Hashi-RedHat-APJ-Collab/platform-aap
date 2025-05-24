@@ -166,12 +166,12 @@ resource "aws_instance" "aap_instance" {
   ami               = var.ami_id
   subnet_id         = aws_subnet.aap_subnet.id
 
-  # Specify the root block device to adjust volume size
-  root_block_device {
-    volume_size           = 150   # Set desired size in GB (e.g., 100 GB)
-    volume_type           = "gp3" # Optional: Specify volume type (e.g., "gp3" for general purpose SSD)
-    delete_on_termination = true  # Optional: Automatically delete volume on instance termination
-  }
+  # # Specify the root block device to adjust volume size
+  # root_block_device {
+  #   volume_size           = 150   # Set desired size in GB (e.g., 100 GB)
+  #   volume_type           = "gp3" # Optional: Specify volume type (e.g., "gp3" for general purpose SSD)
+  #   delete_on_termination = true  # Optional: Automatically delete volume on instance termination
+  # }
   
 
   tags = {
