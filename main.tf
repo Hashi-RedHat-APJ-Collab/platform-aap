@@ -143,19 +143,19 @@ resource "aws_security_group_rule" "egress_access" {
   security_group_id = aws_security_group.aap_security_group.id
 }
 
-# Set ami for ec2 instance
-data "aws_ami" "rhel" {
-  most_recent = true
-  filter {
-    name   = "name"
-    values = ["RHEL-9.5.0_HVM*"]
-  }
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-  owners = ["309956199498"]
-}
+# # Set ami for ec2 instance
+# data "aws_ami" "rhel" {
+#   most_recent = true
+#   filter {
+#     name   = "name"
+#     values = ["RHEL-9.5.0_HVM*"]
+#   }
+#   filter {
+#     name   = "virtualization-type"
+#     values = ["hvm"]
+#   }
+#   owners = ["309956199498"]
+# }
 
 resource "aws_instance" "aap_instance" {
   instance_type               = "m6a.xlarge"
@@ -163,7 +163,7 @@ resource "aws_instance" "aap_instance" {
   associate_public_ip_address = true
   key_name                    = module.key_pair.key_pair_name
   #user_data                   = file("user_data.txt")
-  ami               = data.aws_ami.rhel.id
+  ami               = var.ami_id
   subnet_id         = aws_subnet.aap_subnet.id
 
   # Specify the root block device to adjust volume size
