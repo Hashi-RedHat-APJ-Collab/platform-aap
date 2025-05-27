@@ -15,3 +15,12 @@ output "instance_id" {
 output "efs_dns_name" {
   value = aws_efs_file_system.efs.dns_name
 }
+
+output "alb_dns_name" {
+  description = "DNS name of the ALB"
+  value       = aws_lb.aap_alb.dns_name
+}
+
+output "alb_log_bucket_name" {
+  value = aws_s3_bucket.alb_logs.bucket
+}
