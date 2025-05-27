@@ -1,2 +1,2 @@
-ami_id = "ami-0a7aa287b266aba68"
+ami_id = "ami-004c6b53c5545abfb"
 aws_region = "ap-southeast-2"
