@@ -18,9 +18,10 @@ output "efs_dns_name" {
 
 output "alb_dns_name" {
   description = "DNS name of the ALB"
-  value       = aws_lb.aap_alb.dns_name
+  value       = var.create_alb ? aws_lb.aap_alb[0].dns_name : null
 }
 
 output "alb_log_bucket_name" {
-  value = aws_s3_bucket.alb_logs.bucket
+  description = "Name of the S3 bucket for ALB logs"
+  value       = var.create_alb ? aws_s3_bucket.alb_logs[0].bucket : null
 }

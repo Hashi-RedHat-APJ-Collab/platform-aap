@@ -8,6 +8,12 @@ variable "ami_id" {
   default = "ami-0a7aa287b266aba68"
 }
 
+variable "create_alb" {
+  description = "Whether to create ALB, ACME certificate, and Route53 resources"
+  type        = bool
+  default     = true
+}
+
 variable "acme_email" {
   description = "Email address for Let's Encrypt registration"
   type        = string
