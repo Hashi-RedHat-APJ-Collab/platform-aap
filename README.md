@@ -1,7 +1,7 @@
 # platform-aap
 
 ## This repo is dependent on AAP containerized packer build
-
+This project expects an "ami_id" from the output of "demo-packer-aap" project.
 
 
 ## ⚠️ ACME + Route 53 DNS Challenge: Region Requirement
