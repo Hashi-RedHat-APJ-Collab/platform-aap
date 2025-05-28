@@ -12,6 +12,9 @@ resource "acme_certificate" "cert" {
 
   dns_challenge {
     provider = "route53"
+    config = {
+      AWS_DEFAULT_REGION         = var.aws_region
+    }
   }
 }
 
