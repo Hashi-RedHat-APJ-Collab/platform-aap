@@ -21,11 +21,6 @@ output "alb_dns_name" {
   value       = var.create_alb ? aws_lb.aap_alb[0].dns_name : null
 }
 
-output "alb_log_bucket_name" {
-  description = "Name of the S3 bucket for ALB logs"
-  value       = var.create_alb ? aws_s3_bucket.alb_logs[0].bucket : null
-}
-
 output "route53_record_name" {
   description = "Route53 record name for the ALB"
   value       = var.create_alb ? "https://${aws_route53_record.aap_alb_dns[0].fqdn}" : null

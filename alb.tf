@@ -90,11 +90,11 @@ resource "aws_lb" "aap_alb" {
     aws_subnet.aap_public_subnet_az1.id,
     aws_subnet.aap_public_subnet_az2.id
   ]
-  access_logs {
-    bucket  = aws_s3_bucket.alb_logs[0].bucket
-    enabled = true
-    prefix  = "alb-logs"
-  }
+  # access_logs {
+  #   bucket  = aws_s3_bucket.alb_logs[0].bucket
+  #   enabled = true
+  #   prefix  = "alb-logs"
+  # }
   tags = {
     Name      = "AAP-ALB"
     Terraform = "true"
@@ -153,36 +153,36 @@ resource "aws_security_group_rule" "alb_to_instance" {
   security_group_id        = aws_security_group.aap_security_group.id
 }
 
-# S3 Bucket for ALB Logs
-resource "aws_s3_bucket" "alb_logs" {
-  count  = var.create_alb ? 1 : 0
-  bucket = "aap-alb-access-s3-logging-bucket-${random_id.bucket_suffix.hex}"
+# # S3 Bucket for ALB Logs
+# resource "aws_s3_bucket" "alb_logs" {
+#   count  = var.create_alb ? 1 : 0
+#   bucket = "aap-alb-access-s3-logging-bucket-${random_id.bucket_suffix.hex}"
 
-  tags = {
-    Name      = "ALB Access Logs"
-    Terraform = "true"
-  }
-}
+#   tags = {
+#     Name      = "ALB Access Logs"
+#     Terraform = "true"
+#   }
+# }
 
-# S3 Bucket Policy for ALB Logs
-resource "aws_s3_bucket_policy" "alb_logs_policy" {
-  count  = var.create_alb ? 1 : 0
-  bucket = aws_s3_bucket.alb_logs[0].id
-  policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [
-      {
-        Sid    = "AWSLogDeliveryWrite",
-        Effect = "Allow",
-        Principal = {
-          Service = "logdelivery.elasticloadbalancing.amazonaws.com"
-        },
-        Action   = "s3:PutObject",
-        Resource = "${aws_s3_bucket.alb_logs[0].arn}/*"
-      }
-    ]
-  })
-}
+# # S3 Bucket Policy for ALB Logs
+# resource "aws_s3_bucket_policy" "alb_logs_policy" {
+#   count  = var.create_alb ? 1 : 0
+#   bucket = aws_s3_bucket.alb_logs[0].id
+#   policy = jsonencode({
+#     Version = "2012-10-17",
+#     Statement = [
+#       {
+#         Sid    = "AWSLogDeliveryWrite",
+#         Effect = "Allow",
+#         Principal = {
+#           Service = "logdelivery.elasticloadbalancing.amazonaws.com"
+#         },
+#         Action   = "s3:PutObject",
+#         Resource = "${aws_s3_bucket.alb_logs[0].arn}/*"
+#       }
+#     ]
+#   })
+# }
 
 # Route53 Data Source
 data "aws_route53_zone" "hashidemos_zone" {
@@ -199,4 +199,40 @@ resource "aws_route53_record" "aap_alb_dns" {
   type    = "CNAME"
   ttl     = 300
   records = [aws_lb.aap_alb[0].dns_name]
+}
+
+
+
+
+resource "terraform_data" "wait_for_healthy_target" {
+  count   = var.create_alb ? 1 : 0
+  
+  provisioner "local-exec" {
+    command = <<EOT
+      echo "Waiting for target to become healthy..."
+      for i in {1..50}; do
+        status=$(aws --region ${var.aws_region} elbv2 describe-target-health \
+          --target-group-arn ${aws_lb_target_group.app_tg[0].arn} \
+          --query 'TargetHealthDescriptions[0].TargetHealth.State'  \
+          --output text)
+
+        echo "Current health status: $status"
+
+        if [ "$status" = "healthy" ]; then
+          echo "Target is healthy!"
+          exit 0
+        fi
+
+        sleep 10
+      done
+
+      echo "Timed out waiting for target to become healthy."
+      exit 
+    EOT
+  }
+
+  depends_on = [
+    aws_instance.aap_instance,
+    aws_route53_record.aap_alb_dns[0]
+  ]
 }
