@@ -34,13 +34,10 @@ resource "aap_job" "config_vault_credentials" {
     "organization_name" : "Default",
     "aap_url" : local.aap_url,
     "role_id" : "test_role_id",
-    "secret_id" : "test_secret_id"
+    "secret_id" : "test_secret_id",
+    "machine_user" : "ec2-user"
   })
-  
 }
-
-
-
 
 output "aap_job_template_id" {
   value = local.template_id
