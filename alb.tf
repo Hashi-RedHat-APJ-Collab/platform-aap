@@ -90,11 +90,7 @@ resource "aws_lb" "aap_alb" {
     aws_subnet.aap_public_subnet_az1.id,
     aws_subnet.aap_public_subnet_az2.id
   ]
-  # access_logs {
-  #   bucket  = aws_s3_bucket.alb_logs[0].bucket
-  #   enabled = true
-  #   prefix  = "alb-logs"
-  # }
+
   tags = {
     Name      = "AAP-ALB"
     Terraform = "true"
@@ -152,37 +148,6 @@ resource "aws_security_group_rule" "alb_to_instance" {
   source_security_group_id = aws_security_group.alb_sg[0].id
   security_group_id        = aws_security_group.aap_security_group.id
 }
-
-# # S3 Bucket for ALB Logs
-# resource "aws_s3_bucket" "alb_logs" {
-#   count  = var.create_alb ? 1 : 0
-#   bucket = "aap-alb-access-s3-logging-bucket-${random_id.bucket_suffix.hex}"
-
-#   tags = {
-#     Name      = "ALB Access Logs"
-#     Terraform = "true"
-#   }
-# }
-
-# # S3 Bucket Policy for ALB Logs
-# resource "aws_s3_bucket_policy" "alb_logs_policy" {
-#   count  = var.create_alb ? 1 : 0
-#   bucket = aws_s3_bucket.alb_logs[0].id
-#   policy = jsonencode({
-#     Version = "2012-10-17",
-#     Statement = [
-#       {
-#         Sid    = "AWSLogDeliveryWrite",
-#         Effect = "Allow",
-#         Principal = {
-#           Service = "logdelivery.elasticloadbalancing.amazonaws.com"
-#         },
-#         Action   = "s3:PutObject",
-#         Resource = "${aws_s3_bucket.alb_logs[0].arn}/*"
-#       }
-#     ]
-#   })
-# }
 
 # Route53 Data Source
 data "aws_route53_zone" "hashidemos_zone" {
