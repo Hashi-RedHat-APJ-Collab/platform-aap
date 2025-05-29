@@ -38,12 +38,16 @@ data "http" "aap_job_template" {
 resource "aap_job" "config_vault_credentials" {
   job_template_id = local.template_id
   extra_vars      = jsonencode({
-    "tenant" : var.tenant,
+    "tenant" : var.tenant, # aligned to Vault
     "organization_name" : "Default",
     "aap_url" : local.aap_url,
-    "role_id" : "test_role_id",
-    "secret_id" : "test_secret_id",
-    "machine_user" : "ec2-user"
+    "role_id" : "test_role_id", # to come from Vault
+    "secret_id" : "test_secret_id", # to come from Vault
+    "machine_user" : "${var.machine_user}",
+    "ssh_public_key": local.ssh-unsigned-public-key,
+    "ssh_private_key": local.ssh-unsigned-private-key,
+    "role" : "aap_${var.tenant}", # to come from Vault
+    "secret_path" : "ssh_${var.tenant}", # to come from Vault
   })
 }
 
