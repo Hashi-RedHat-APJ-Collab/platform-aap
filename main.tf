@@ -234,56 +234,56 @@ module "key_pair" {
   create_private_key = true
 }
 
-resource "local_sensitive_file" "key_pair_pem" {
-  filename        = "${path.root}/../${module.key_pair.key_pair_name}.pem"
-  file_permission = "400"
-  content         = module.key_pair.private_key_pem
-}
+# resource "local_sensitive_file" "key_pair_pem" {
+#   filename        = "${path.root}/../${module.key_pair.key_pair_name}.pem"
+#   file_permission = "400"
+#   content         = module.key_pair.private_key_pem
+# }
 
 
-# Create a Security Group for EFS
-resource "aws_security_group" "efs_security_group" {
-  name        = "efs-sg"
-  description = "Allow EFS access"
-  vpc_id      = aws_vpc.aap_vpc.id
+# # Create a Security Group for EFS
+# resource "aws_security_group" "efs_security_group" {
+#   name        = "efs-sg"
+#   description = "Allow EFS access"
+#   vpc_id      = aws_vpc.aap_vpc.id
 
-  ingress {
-    from_port   = 2049
-    to_port     = 2049
-    protocol    = "tcp"
-    cidr_blocks = ["10.1.0.0/16"] # Adjust CIDR block as needed
-  }
+#   ingress {
+#     from_port   = 2049
+#     to_port     = 2049
+#     protocol    = "tcp"
+#     cidr_blocks = ["10.1.0.0/16"] # Adjust CIDR block as needed
+#   }
 
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+#   egress {
+#     from_port   = 0
+#     to_port     = 0
+#     protocol    = "-1"
+#     cidr_blocks = ["0.0.0.0/0"]
+#   }
 
-  tags = {
-    Name      = "EFS-Security-Group"
-    Terraform = "true"
-  }
-}
+#   tags = {
+#     Name      = "EFS-Security-Group"
+#     Terraform = "true"
+#   }
+# }
 
-# Create an EFS File System
-resource "aws_efs_file_system" "efs" {
-  creation_token   = "aap-efs"
-  performance_mode = "generalPurpose" # or "maxIO" for high IOPS
-  lifecycle_policy {
-    transition_to_ia = "AFTER_30_DAYS" # Optional: Move files to Infrequent Access after 30 days
-  }
+# # Create an EFS File System
+# resource "aws_efs_file_system" "efs" {
+#   creation_token   = "aap-efs"
+#   performance_mode = "generalPurpose" # or "maxIO" for high IOPS
+#   lifecycle_policy {
+#     transition_to_ia = "AFTER_30_DAYS" # Optional: Move files to Infrequent Access after 30 days
+#   }
 
-  tags = {
-    Name      = "AAP-EFS"
-    Terraform = "true"
-  }
-}
+#   tags = {
+#     Name      = "AAP-EFS"
+#     Terraform = "true"
+#   }
+# }
 
-# Create Mount Targets for EFS
-resource "aws_efs_mount_target" "efs_mount_target_az1" {
-  file_system_id  = aws_efs_file_system.efs.id
-  subnet_id       = aws_subnet.aap_public_subnet_az1.id
-  security_groups = [aws_security_group.efs_security_group.id]
-}
+# # Create Mount Targets for EFS
+# resource "aws_efs_mount_target" "efs_mount_target_az1" {
+#   file_system_id  = aws_efs_file_system.efs.id
+#   subnet_id       = aws_subnet.aap_public_subnet_az1.id
+#   security_groups = [aws_security_group.efs_security_group.id]
+# }

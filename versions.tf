@@ -20,7 +20,22 @@ terraform {
       source  = "vancluever/acme"
       version = "~> 2.10"
     }
+
+    aap = {
+      source  = "ansible/aap"
+      version = "~> 1.1.2"
+    }
   }
   required_version = ">= 1.11.0"
+
+  cloud { 
+    
+    organization = "Hashi-RedHat-APJ-Collab" 
+
+    workspaces { 
+      name = "aap-demo-test" 
+    } 
+  } 
+
 }
 

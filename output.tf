@@ -12,9 +12,9 @@ output "instance_id" {
   value = aws_instance.aap_instance.id
 }
 
-output "efs_dns_name" {
-  value = aws_efs_file_system.efs.dns_name
-}
+# output "efs_dns_name" {
+#   value = aws_efs_file_system.efs.dns_name
+# }
 
 output "alb_dns_name" {
   description = "DNS name of the ALB"
