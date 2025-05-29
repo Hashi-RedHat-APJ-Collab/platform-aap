@@ -7,3 +7,4 @@ subject_alternative_names = [
   "aap.david-joo.sbx.hashidemos.io",
 ]
 route53_zone_name = "david-joo.sbx.hashidemos.io."
+job_template_name = "Hashicorp Vault demo setup"
