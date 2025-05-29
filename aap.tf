@@ -1,0 +1,47 @@
+locals {
+    # ternary operator to set the AAP URL if  var.create_alb ? 1 : 0
+  aap_url = var.create_alb ? "https://${aws_route53_record.aap_alb_dns[0].fqdn}" : "http://${aws_instance.aap_instance.public_ip}"
+  response_body = jsondecode(data.http.aap_job_template.response_body)
+  template_id = local.response_body.results[0].id
+}
+
+#urlencode the job_template_name
+data "http" "aap_job_template" {
+  depends_on = [terraform_data.wait_for_healthy_target]
+  url = "${local.aap_url}/api/controller/v2/job_templates/?name=${urlencode(var.job_template_name)}"
+  insecure=true
+
+  request_headers = {
+    Accept        = "application/json"
+    Authorization = "Basic ${base64encode("${var.aap_username}:${var.aap_password}")}"
+  }
+}
+
+
+# tenant: demo
+# organization_name: Default
+# vault_url: https://tf-aap-public-vault-76d1afab.7739a0fc.z1.hashicorp.cloud:8200
+# vault_namespace: admin/hashi-redhat
+# aap_url: https://aap.simon-lynch.sbx.hashidemos.io
+# state: present
+# secret_id: $encrypted$
+# role_id: $encrypted$
+
+resource "aap_job" "config_vault_credentials" {
+  job_template_id = local.template_id
+  extra_vars      = jsonencode({
+    "tenant" : var.tenant,
+    "organization_name" : "Default",
+    "aap_url" : local.aap_url,
+    "role_id" : "test_role_id",
+    "secret_id" : "test_secret_id"
+  })
+  
+}
+
+
+
+
+output "aap_job_template_id" {
+  value = local.template_id
+}

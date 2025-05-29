@@ -34,3 +34,24 @@ variable "route53_zone_name" {
   description = "The name of the Route 53 hosted zone to use (must end with a dot)"
   type        = string
 }
+
+variable "aap_username" {
+  description = "Username for AAP"
+  type        = string
+}
+
+variable "aap_password" {
+  description = "Password for AAP"
+  type        = string
+}
+variable "job_template_name" {
+  description = "Name of the AAP job template to run"
+  type        = string
+  default     = "Hashicorp Vault demo setup"
+}
+
+variable "tenant" {
+  description = "Tenant for the AAP job"
+  type        = string
+  default     = "demo"
+}
