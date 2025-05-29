@@ -55,3 +55,9 @@ variable "tenant" {
   type        = string
   default     = "demo"
 }
+
+variable "machine_user" {
+  description = "Machine user for AAP"
+  type        = string
+  default     = "ec2-user"
+}
