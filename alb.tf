@@ -198,6 +198,7 @@ resource "terraform_data" "wait_for_healthy_target" {
 
   depends_on = [
     aws_instance.aap_instance,
+    aws_lb_target_group.app_tg[0],
     aws_route53_record.aap_alb_dns[0]
   ]
 }

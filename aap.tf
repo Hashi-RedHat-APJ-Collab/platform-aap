@@ -49,6 +49,7 @@ resource "aap_job" "config_vault_credentials" {
     "role" : "aap_${var.tenant}", # to come from Vault
     "secret_path" : "ssh_${var.tenant}", # to come from Vault
   })
+
 }
 
 output "aap_job_template_id" {
