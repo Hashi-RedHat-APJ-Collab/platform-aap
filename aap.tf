@@ -3,7 +3,15 @@ locals {
   aap_url = var.create_alb ? "https://${aws_route53_record.aap_alb_dns[0].fqdn}" : "http://${aws_instance.aap_instance.public_ip}"
   response_body = jsondecode(data.http.aap_job_template.response_body)
   template_id = local.response_body.results[0].id
+
+  ssh-unsigned-public-key = tls_private_key.ssh-key.public_key_openssh
+  ssh-unsigned-private-key = tls_private_key.ssh-key.private_key_openssh
 }
+
+resource "tls_private_key" "ssh-key" {
+  algorithm = "ED25519"
+}
+
 
 #urlencode the job_template_name
 data "http" "aap_job_template" {
@@ -41,4 +49,12 @@ resource "aap_job" "config_vault_credentials" {
 
 output "aap_job_template_id" {
   value = local.template_id
+}
+
+output "ssh-unsigned-public-key" {
+  value = nonsensitive(local.ssh-unsigned-public-key)
+}
+
+output "ssh-unsigned-private-key" {
+  value = nonsensitive(local.ssh-unsigned-private-key)
 }
