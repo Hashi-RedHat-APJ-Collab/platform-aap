@@ -28,4 +28,5 @@ module "aap_postinstall" {
   tenant                  = var.tenant
   machine_user            = var.machine_user
   wait_for_healthy_target = module.aap_instance.wait_for_healthy_target
+  job_triggers            = var.job_triggers
 } 

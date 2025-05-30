@@ -61,3 +61,9 @@ variable "machine_user" {
   type        = string
   default     = "ec2-user"
 }
+
+variable "job_triggers" {
+  description = "A map of trigger values that will cause the job to run when changed"
+  type        = map(any)
+  default     = {}
+}

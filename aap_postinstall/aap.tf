@@ -52,4 +52,6 @@ resource "aap_job" "config_vault_credentials" {
     "ssh_vault_role" : "ssh_${var.tenant}", # to come from Vault
     "secret_path" : "ssh_${var.tenant}", # to come from Vault
   })
+
+  triggers = var.job_triggers
 }

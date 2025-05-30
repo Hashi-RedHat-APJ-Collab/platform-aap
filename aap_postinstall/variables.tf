@@ -48,3 +48,9 @@ variable "wait_for_healthy_target" {
   type        = any
   default     = null
 } 
+
+variable "job_triggers" {
+  description = "A map of trigger values that will cause the job to run when changed"
+  type        = map(any)
+  default     = {}
+}
