@@ -1,6 +1,6 @@
 locals {
     # ternary operator to set the AAP URL if  var.create_alb ? 1 : 0
-  aap_url = var.create_alb ? "https://${aws_route53_record.aap_alb_dns[0].fqdn}" : "http://${aws_instance.aap_instance.public_ip}"
+  aap_url = var.create_alb ? "https://${var.domain_name}" : "http://${aws_instance.aap_instance.public_ip}"
   response_body = jsondecode(data.http.aap_job_template.response_body)
   template_id = local.response_body.results[0].id
 
@@ -36,6 +36,11 @@ data "http" "aap_job_template" {
 # role_id: $encrypted$
 
 resource "aap_job" "config_vault_credentials" {
+  depends_on = [
+                  data.http.aap_job_template,
+                  terraform_data.wait_for_healthy_target
+            ]
+            
   job_template_id = local.template_id
   extra_vars      = jsonencode({
     "tenant" : var.tenant, # aligned to Vault

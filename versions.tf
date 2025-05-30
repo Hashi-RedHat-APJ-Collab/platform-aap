@@ -26,7 +26,7 @@ terraform {
       version = "~> 1.1.2"
     }
   }
-  required_version = ">= 1.11.0"
+  required_version = ">= 1.12.0"
 
   cloud { 
     
