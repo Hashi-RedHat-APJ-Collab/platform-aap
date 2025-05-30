@@ -28,14 +28,14 @@ terraform {
   }
   required_version = ">= 1.11.0"
 
-  cloud { 
-    
-    organization = "Hashi-RedHat-APJ-Collab" 
+  cloud {
 
-    workspaces { 
-      name = "aap-demo-test" 
-    } 
-  } 
+    organization = "Hashi-RedHat-APJ-Collab"
+
+    workspaces {
+      name = "aap-demo-test"
+    }
+  }
 
 }
 
