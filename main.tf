@@ -36,6 +36,8 @@ module "aap_postinstall" {
   aap_password            = var.aap_password
   vault_approle_role_id   = module.vault_ssh.approle_role_id
   vault_approle_secret_id = module.vault_ssh.approle_secret_id
+  unsigned_ssh_public_key = module.vault_ssh.unsigned_ssh_public_key
+  unsigned_ssh_private_key = module.vault_ssh.unsigned_ssh_private_key
   
   # Optional variables
   create_alb              = var.create_alb
