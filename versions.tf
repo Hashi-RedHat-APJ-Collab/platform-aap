@@ -21,12 +21,12 @@ terraform {
       version = "~> 2.10"
     }
 
-    aap = {
-      source  = "ansible/aap"
-      version = "~> 1.1.2"
-    }
+    # aap = {
+    #   source  = "ansible/aap"
+    #   version = "~> 1.1.2"
+    # }
   }
-  required_version = ">= 1.12.0"
+  required_version = ">= 1.11.0"
 
   cloud { 
     

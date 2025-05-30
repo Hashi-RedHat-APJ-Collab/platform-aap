@@ -1,6 +1,6 @@
 locals {
-    # ternary operator to set the AAP URL if  var.create_alb ? 1 : 0
-  aap_url = var.create_alb ? "https://${var.domain_name}" : "http://${aws_instance.aap_instance.public_ip}"
+    # ternary operator to set the AAP URL if ALB is created
+  aap_url = var.create_alb ? "https://${var.domain_name}" : "http://${var.aap_instance_public_ip}"
   response_body = jsondecode(data.http.aap_job_template.response_body)
   template_id = local.response_body.results[0].id
 
@@ -12,19 +12,17 @@ resource "tls_private_key" "ssh-key" {
   algorithm = "ED25519"
 }
 
-
-#urlencode the job_template_name
+# urlencode the job_template_name
 data "http" "aap_job_template" {
-  depends_on = [terraform_data.wait_for_healthy_target]
+  depends_on = [var.wait_for_healthy_target]
   url = "${local.aap_url}/api/controller/v2/job_templates/?name=${urlencode(var.job_template_name)}"
-  insecure=true
+  insecure = true
 
   request_headers = {
     Accept        = "application/json"
     Authorization = "Basic ${base64encode("${var.aap_username}:${var.aap_password}")}"
   }
 }
-
 
 # tenant: demo
 # organization_name: Default
@@ -37,9 +35,9 @@ data "http" "aap_job_template" {
 
 resource "aap_job" "config_vault_credentials" {
   depends_on = [
-                  data.http.aap_job_template,
-                  terraform_data.wait_for_healthy_target
-            ]
+    data.http.aap_job_template,
+    var.wait_for_healthy_target
+  ]
             
   job_template_id = local.template_id
   extra_vars      = jsonencode({
@@ -54,17 +52,4 @@ resource "aap_job" "config_vault_credentials" {
     "role" : "aap_${var.tenant}", # to come from Vault
     "secret_path" : "ssh_${var.tenant}", # to come from Vault
   })
-
-}
-
-output "aap_job_template_id" {
-  value = local.template_id
-}
-
-output "ssh-unsigned-public-key" {
-  value = nonsensitive(local.ssh-unsigned-public-key)
-}
-
-output "ssh-unsigned-private-key" {
-  value = nonsensitive(local.ssh-unsigned-private-key)
 }

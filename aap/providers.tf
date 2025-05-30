@@ -1,4 +1,4 @@
 provider "aap" {
-  host                 = "https://${var.domain_name}"
+  host                 = local.aap_url
   insecure_skip_verify = true
 }

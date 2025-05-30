@@ -166,9 +166,6 @@ resource "aws_route53_record" "aap_alb_dns" {
   records = [aws_lb.aap_alb[0].dns_name]
 }
 
-
-
-
 resource "terraform_data" "wait_for_healthy_target" {
   count   = var.create_alb ? 1 : 0
   
@@ -201,4 +198,4 @@ resource "terraform_data" "wait_for_healthy_target" {
     aws_lb_target_group.app_tg[0],
     aws_route53_record.aap_alb_dns[0]
   ]
-}
+} 
