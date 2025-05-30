@@ -19,3 +19,9 @@ variable "ssh_role_name" {
   type        = string
   default     = "ssh_demo"
 }
+
+variable "tenant" {
+  description = "Tenant identifier for organizing secrets and resources"
+  type        = string
+  default     = "demo"
+}

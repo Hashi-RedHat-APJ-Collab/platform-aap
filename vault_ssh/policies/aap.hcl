@@ -17,13 +17,27 @@ path "ssh/roles/{{identity.entity.name}}" {
     capabilities = ["read"]
 }
 
-# Allow access to KV secrets engine for the entity's tenant
+# Allow access to KV-v2 secrets engine for the entity's tenant-specific path
+# This supports unique paths per tenant under the secrets mount
+path "secrets/data/{{identity.entity.name}}" {
+    capabilities = ["create", "read", "update", "delete", "patch"]
+}
+
 path "secrets/data/{{identity.entity.name}}/*" {
-    capabilities = ["create", "read", "update", "delete", "list", "patch"]
+    capabilities = ["create", "read", "update", "delete", "patch"]
+}
+
+path "secrets/metadata/{{identity.entity.name}}" {
+    capabilities = ["create", "read", "update", "delete", "list"]
 }
 
 path "secrets/metadata/{{identity.entity.name}}/*" {
-    capabilities = ["create", "read", "update", "delete", "list", "patch"]
+    capabilities = ["create", "read", "update", "delete", "list"]
+}
+
+# Allow listing at the tenant level to see available secrets
+path "secrets/metadata" {
+    capabilities = ["list"]
 }
 
 # Allow reading own token information
