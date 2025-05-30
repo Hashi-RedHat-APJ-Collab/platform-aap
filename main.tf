@@ -13,8 +13,8 @@ module "aap_instance" {
   subject_alternative_names = var.subject_alternative_names
 }
 
-module "aap_config" {
-  source = "./aap"
+module "aap_postinstall" {
+  source = "./aap_postinstall"
 
   # Required variables
   domain_name              = var.domain_name

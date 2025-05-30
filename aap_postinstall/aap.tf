@@ -49,7 +49,7 @@ resource "aap_job" "config_vault_credentials" {
     "machine_user" : "${var.machine_user}",
     "ssh_public_key": local.ssh-unsigned-public-key,
     "ssh_private_key": local.ssh-unsigned-private-key,
-    "role" : "aap_${var.tenant}", # to come from Vault
+    "ssh_vault_role" : "ssh_${var.tenant}", # to come from Vault
     "secret_path" : "ssh_${var.tenant}", # to come from Vault
   })
 }
