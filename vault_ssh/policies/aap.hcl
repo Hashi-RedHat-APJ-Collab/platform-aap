@@ -7,11 +7,6 @@ path "ssh/sign/{{identity.entity.name}}" {
     capabilities = ["create", "update"]
 }
 
-# Allow reading SSH CA public key
-path "ssh/public_key" {
-    capabilities = ["read"]
-}
-
 # Allow reading the entity's SSH role configuration
 path "ssh/roles/{{identity.entity.name}}" {
     capabilities = ["read"]
