@@ -7,7 +7,7 @@ provider "acme" {
 }
 
 provider "vault" {
-  # Configuration should be provided via environment variables:
+  namespace = "admin/hashi-redhat"
   # VAULT_ADDR, VAULT_TOKEN, etc.
 }
 
