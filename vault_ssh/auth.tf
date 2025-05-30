@@ -13,7 +13,6 @@ resource "vault_approle_auth_backend_role_secret_id" "this" {
 
 resource vault_identity_entity "this" {
   name = var.ssh_role_name
-  policies = ["aap"]
   metadata = {
     ssh_role_name = var.ssh_role_name
   }
