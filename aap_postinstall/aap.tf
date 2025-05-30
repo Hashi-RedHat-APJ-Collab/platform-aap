@@ -3,14 +3,9 @@ locals {
   aap_url = var.create_alb ? "https://${var.domain_name}" : "http://${var.aap_instance_public_ip}"
   response_body = jsondecode(data.http.aap_job_template.response_body)
   template_id = local.response_body.results[0].id
-
-  ssh-unsigned-public-key = tls_private_key.ssh-key.public_key_openssh
-  ssh-unsigned-private-key = tls_private_key.ssh-key.private_key_openssh
 }
 
-resource "tls_private_key" "ssh-key" {
-  algorithm = "ED25519"
-}
+
 
 # urlencode the job_template_name
 data "http" "aap_job_template" {
@@ -47,8 +42,8 @@ resource "aap_job" "config_vault_credentials" {
     "role_id" : var.vault_approle_role_id, # from Vault
     "secret_id" : var.vault_approle_secret_id, # from Vault
     "machine_user" : "${var.machine_user}",
-    "ssh_public_key": local.ssh-unsigned-public-key,
-    "ssh_private_key": local.ssh-unsigned-private-key,
+    "ssh_public_key": var.ssh-unsigned-public-key,
+    "ssh_private_key": var.ssh-unsigned-private-key,
     "ssh_vault_role" : "ssh_${var.tenant}", # to come from Vault
     "secret_path" : "ssh_${var.tenant}", # to come from Vault
   })

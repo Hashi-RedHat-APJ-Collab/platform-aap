@@ -22,7 +22,7 @@ module "vault_ssh" {
   
   # Optional variables
   auth_backend_approle_path   = var.auth_backend_approle_path
-  ssh_role_name               = "ssh_${var.tenant}"
+  ssh_role_name               = "${var.tenant}"
   tenant                      = var.tenant
 }
 

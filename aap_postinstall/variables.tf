@@ -65,3 +65,12 @@ variable "vault_approle_secret_id" {
   type        = string
   sensitive   = true
 }
+
+variable "unsigned_ssh_private_key" {
+  description = "Unsigned SSH private key from vault_ssh module"
+  type        = string
+}
+variable "unsigned_ssh_public_key" {
+  description = "Unsigned SSH public key from vault_ssh module"
+  type        = string
+}
