@@ -7,7 +7,6 @@ provider "acme" {
 }
 
 provider "vault" {
-  namespace = "admin/hashi-redhat"
   # VAULT_ADDR, VAULT_TOKEN, etc.
 }
 
