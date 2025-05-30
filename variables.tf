@@ -90,5 +90,5 @@ variable "ssh_role_name" {
 variable "approle_mount_accessor" {
   description = "Mount accessor for the AppRole authentication backend"
   type        = string
-  default     = ""
+  default     = "auth_approle_6493a2b7"
 }
