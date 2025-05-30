@@ -85,3 +85,10 @@ variable "ssh_role_name" {
   type        = string
   default     = "ssh_demo"
 }
+
+# approle_mount_accessor
+variable "approle_mount_accessor" {
+  description = "Mount accessor for the AppRole authentication backend"
+  type        = string
+  default     = ""
+}

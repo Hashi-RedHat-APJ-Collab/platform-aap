@@ -24,6 +24,7 @@ module "vault_ssh" {
   auth_backend_approle_path   = var.auth_backend_approle_path
   ssh_role_name               = "${var.tenant}"
   tenant                      = var.tenant
+  approle_mount_accessor      = var.approle_mount_accessor
 }
 
 module "aap_postinstall" {
