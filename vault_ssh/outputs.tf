@@ -6,7 +6,7 @@ output "approle_secret_id" {
   value = vault_approle_auth_backend_role_secret_id.this.secret_id
 }
 
-output "unsigned_ssh_private_key" {
+output "unsigned_ssh_public_key" {
   value = tls_private_key.ssh-key.public_key_openssh
 }
 
