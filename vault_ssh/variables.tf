@@ -13,3 +13,9 @@ variable "auth_backend_approle_path" {
   type        = string
   default     = "approle"
 }
+
+variable "ssh_role_name" {
+  description = "Name of the SSH role for AppRole authentication"
+  type        = string
+  default     = "ssh_demo"
+}

@@ -20,11 +20,11 @@ terraform {
       source  = "vancluever/acme"
       version = "~> 2.10"
     }
+    vault = {
+      source  = "hashicorp/vault"
+      version = "~> 4.5"
+    }
 
-    # aap = {
-    #   source  = "ansible/aap"
-    #   version = "~> 1.1.2"
-    # }
   }
   required_version = ">= 1.11.0"
 

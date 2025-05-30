@@ -44,8 +44,8 @@ resource "aap_job" "config_vault_credentials" {
     "tenant" : var.tenant, # aligned to Vault
     "organization_name" : "Default",
     "aap_url" : local.aap_url,
-    "role_id" : "test_role_id", # to come from Vault
-    "secret_id" : "test_secret_id", # to come from Vault
+    "role_id" : var.vault_approle_role_id, # from Vault
+    "secret_id" : var.vault_approle_secret_id, # from Vault
     "machine_user" : "${var.machine_user}",
     "ssh_public_key": local.ssh-unsigned-public-key,
     "ssh_private_key": local.ssh-unsigned-private-key,

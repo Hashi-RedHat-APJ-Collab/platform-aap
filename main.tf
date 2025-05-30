@@ -13,6 +13,18 @@ module "aap_instance" {
   subject_alternative_names = var.subject_alternative_names
 }
 
+module "vault_ssh" {
+  source = "./vault_ssh"
+
+  # Required variables
+  namespace                   = var.vault_namespace
+  aap_admin_password          = var.aap_password
+  
+  # Optional variables
+  auth_backend_approle_path   = var.auth_backend_approle_path
+  ssh_role_name               = "ssh_${var.tenant}"
+}
+
 module "aap_postinstall" {
   source = "./aap_postinstall"
 
@@ -21,6 +33,8 @@ module "aap_postinstall" {
   aap_instance_public_ip   = module.aap_instance.public_ip
   aap_username            = var.aap_username
   aap_password            = var.aap_password
+  vault_approle_role_id   = module.vault_ssh.approle_role_id
+  vault_approle_secret_id = module.vault_ssh.approle_secret_id
   
   # Optional variables
   create_alb              = var.create_alb

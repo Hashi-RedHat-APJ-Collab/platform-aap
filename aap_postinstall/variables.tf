@@ -54,3 +54,14 @@ variable "job_triggers" {
   type        = map(any)
   default     = {}
 }
+
+variable "vault_approle_role_id" {
+  description = "Vault AppRole role ID from vault_ssh module"
+  type        = string
+}
+
+variable "vault_approle_secret_id" {
+  description = "Vault AppRole secret ID from vault_ssh module"
+  type        = string
+  sensitive   = true
+}

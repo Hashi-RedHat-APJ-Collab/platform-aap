@@ -67,3 +67,21 @@ variable "job_triggers" {
   type        = map(any)
   default     = {}
 }
+
+variable "vault_namespace" {
+  description = "Vault namespace for the vault_ssh module"
+  type        = string
+  default     = "admin/hashi-redhat"
+}
+
+variable "auth_backend_approle_path" {
+  description = "Auth backend approle path for Vault"
+  type        = string
+  default     = "approle"
+}
+
+variable "ssh_role_name" {
+  description = "Name of the SSH role for AppRole authentication"
+  type        = string
+  default     = "ssh_demo"
+}

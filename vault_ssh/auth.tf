@@ -1,31 +1,22 @@
-# resource "vault_auth_backend" "approle" {
-#   type = "approle"
-
-#   tune {
-#     default_lease_ttl = "2190h"
-#     max_lease_ttl     = "4380h"
-#   }
-  
-#   namespace = var.namespace
-# }
-
 resource "vault_approle_auth_backend_role" "this" {
   backend         = var.auth_backend_approle_path
-  role_name       = "aap"
+  role_name       = var.ssh_role_name
   token_policies  = ["aap"]
 
   namespace = var.namespace
 }
 
 resource "vault_approle_auth_backend_role_secret_id" "this" {
-  backend   = vault_auth_backend.approle.path
+  backend   = var.auth_backend_approle_path
   role_name = vault_approle_auth_backend_role.this.role_name
 
   namespace = var.namespace
 }
-
-resource "vault_auth_backend" "this" {
-  type = "userpass"
+#create entity alias for the role
+resource "vault_identity_entity_alias" "this" {
+  name         = var.ssh_role_name
+  mount_accessor = vault_approle_auth_backend_role.this.accessor
+  canonical_id = vault_approle_auth_backend_role.this.role_id
 
   namespace = var.namespace
 }
