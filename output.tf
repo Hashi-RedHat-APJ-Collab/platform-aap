@@ -50,29 +50,29 @@ output "private_key_pem" {
   sensitive   = true
 }
 
-# AAP Configuration outputs
-output "aap_job_template_id" {
-  description = "ID of the AAP job template"
-  value       = module.aap_config.aap_job_template_id
-}
+# # AAP Configuration outputs
+# output "aap_job_template_id" {
+#   description = "ID of the AAP job template"
+#   value       = module.aap_config.aap_job_template_id
+# }
 
-output "ssh_unsigned_public_key" {
-  description = "SSH unsigned public key"
-  value       = module.aap_config.ssh_unsigned_public_key
-}
+# output "ssh_unsigned_public_key" {
+#   description = "SSH unsigned public key"
+#   value       = module.aap_config.ssh_unsigned_public_key
+# }
 
-output "ssh_unsigned_private_key" {
-  description = "SSH unsigned private key"
-  value       = module.aap_config.ssh_unsigned_private_key
-  sensitive   = true
-}
+# output "ssh_unsigned_private_key" {
+#   description = "SSH unsigned private key"
+#   value       = module.aap_config.ssh_unsigned_private_key
+#   sensitive   = true
+# }
 
-output "aap_url" {
-  description = "AAP URL (either ALB domain or instance IP)"
-  value       = module.aap_config.aap_url
-}
+# output "aap_url" {
+#   description = "AAP URL (either ALB domain or instance IP)"
+#   value       = module.aap_config.aap_url
+# }
 
-output "aap_job_id" {
-  description = "ID of the executed AAP job"
-  value       = module.aap_config.aap_job_id
-}
+# output "aap_job_id" {
+#   description = "ID of the executed AAP job"
+#   value       = module.aap_config.aap_job_id
+# }

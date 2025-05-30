@@ -17,8 +17,3 @@ output "aap_url" {
   description = "AAP URL (either ALB domain or instance IP)"
   value       = local.aap_url
 }
-
-output "aap_job_id" {
-  description = "ID of the executed AAP job"
-  value       = aap_job.config_vault_credentials.id
-} 
