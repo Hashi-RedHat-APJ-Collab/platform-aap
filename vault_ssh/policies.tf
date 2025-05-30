@@ -6,5 +6,4 @@ resource "vault_policy" "this" {
   name     = trimsuffix(each.value, ".hcl")
   policy   = file("${path.module}/policies/${each.value}")
 
-  namespace = var.namespace
 }

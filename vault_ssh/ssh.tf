@@ -14,5 +14,4 @@ resource "vault_ssh_secret_backend_role" "this" {
   default_extensions      = {"permit-pty"=""}
   allowed_extensions      = "permit-pty,permit-port-forwarding"
 
-  namespace = var.namespace
 }

@@ -7,7 +7,6 @@ resource "vault_mount" "kvv2" {
   }
   description = "kv-v2 secrets engine for the ${var.namespace} team"
 
-  namespace = var.namespace
 }
 
 
@@ -23,5 +22,4 @@ resource "vault_kv_secret_v2" "aap" {
   }
   )
 
-  namespace = var.namespace
 }
