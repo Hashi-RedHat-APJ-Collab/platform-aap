@@ -29,6 +29,7 @@ module "vault_ssh" {
 
 module "aap_postinstall" {
   source = "./aap_postinstall"
+  depends_on = [ module.aap_instance, module.vault_ssh ] 
 
   # Required variables
   domain_name              = var.domain_name
@@ -48,3 +49,9 @@ module "aap_postinstall" {
   wait_for_healthy_target = module.aap_instance.wait_for_healthy_target
   job_triggers            = var.job_triggers
 } 
+
+
+locals {
+    # ternary operator to set the AAP URL if ALB is created
+  aap_url = var.create_alb ? "https://${var.domain_name}" : "http://${var.aap_instance_public_ip}"
+}
