@@ -53,5 +53,5 @@ module "aap_postinstall" {
 
 locals {
     # ternary operator to set the AAP URL if ALB is created
-  aap_url = var.create_alb ? "https://${var.domain_name}" : "http://${var.aap_instance_public_ip}"
+  aap_url = var.create_alb ? "https://${var.domain_name}" : "http://${module.aap_instance.public_ip}"
 }
