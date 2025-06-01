@@ -55,16 +55,15 @@ Before you begin, ensure you have:
    aap_password      = "your-secure-password"
    ```
 
-3. Set the AWS region environment variable (required for ACME):
-   ```bash
-   export AWS_REGION=ap-southeast-2
-   ```
 
-4. Initialize and apply Terraform:
+3. Initialize and apply Terraform:
+
+Today a targeted run is required, once Terraform 1.13 is out we can test deferred changes
+alternative here is split aap module into a second workspace or use Terraform stacks.
+
    ```bash
    terraform init
-   terraform plan
-   terraform apply
+   terraform apply -auto-approve -target module.aap_instance; terraform apply -auto-approve
    ```
 
 ## Module Structure
