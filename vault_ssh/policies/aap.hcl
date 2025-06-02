@@ -9,20 +9,20 @@ path "ssh/sign/{{identity.entity.name}}" {
 
 # Allow access to KV-v2 secrets engine for the entity's tenant-specific path
 # This supports unique paths per tenant under the secrets mount
-path "secrets/data/{{identity.entity.name}}" {
+path "kv/data/{{identity.entity.name}}" {
     capabilities = ["create", "read", "update", "delete", "patch"]
 }
 
-path "secrets/data/{{identity.entity.name}}/*" {
+path "kv/data/{{identity.entity.name}}/*" {
     capabilities = ["create", "read", "update", "delete", "patch"]
 }
 
-path "secrets/metadata/{{identity.entity.name}}/*" {
+path "kv/metadata/{{identity.entity.name}}/*" {
     capabilities = ["create", "read", "update", "delete", "list"]
 }
 
 # Allow listing at the tenant level to see available secrets
-path "secrets/metadata" {
+path "kv/metadata" {
     capabilities = ["list"]
 }
 
