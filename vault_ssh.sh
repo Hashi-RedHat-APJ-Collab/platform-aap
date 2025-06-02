@@ -41,8 +41,10 @@ function authenticate_to_vault() {
   echo "🔐 Logging into Vault..."
   export VAULT_NAMESPACE
   export VAULT_ADDR
+  export role_id
+  export secret_id
   #export VAULT_TOKEN=$(vault login -method=github token="$GITHUB_TOKEN" -format=json | jq -r '.auth.client_token')
-  export VAULT_TOKEN=$(vault write auth/approle/login role_id=4ac487d2-6373-2220-93df-9eaec2610a95 secret_id=c7307b21-d9b6-4e08-b710-e7a6a2ded0e1 -format=json | jq -r '.auth.client_token')
+  export VAULT_TOKEN=$(vault write auth/approle/login role_id=${role_id} secret_id=${secret_id} -format=json | jq -r '.auth.client_token')
 }
 
 function sign_ssh_key() {
