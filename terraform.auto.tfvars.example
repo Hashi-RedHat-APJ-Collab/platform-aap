@@ -13,5 +13,5 @@ job_template_name = "Hashicorp Vault demo setup"
 vault_namespace = "admin/hashi-redhat"
 ssh_role_name = "ssh_demo"
 job_triggers = {
-  "version1" = "2"
+  "version1" = "4"
 }

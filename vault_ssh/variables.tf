@@ -32,3 +32,9 @@ variable "approle_mount_accessor" {
   type        = string
   default     = ""
 }
+
+variable "kvv2_mount_path" {
+  description = "Path for the KV v2 secrets engine"
+  type        = string
+  default     = "kv"
+}
