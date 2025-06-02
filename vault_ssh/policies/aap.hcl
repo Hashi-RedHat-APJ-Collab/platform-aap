@@ -3,9 +3,17 @@
 # Uses templating based on entity name
 
 # Allow access to SSH secrets engine for signing with the entity's role
+# path "ssh/sign/{{identity.entity.aliases.auth_approle_b0d54875.custom_metadata.ssh_role_name}}" {
+#     capabilities = ["read", "update"]
+# }
+
 path "ssh/sign/{{identity.entity.name}}" {
-    capabilities = ["read", "update"]
+    capabilities = ["create", "read", "update"]
 }
+
+# path "ssh/sign/{{identity.entity.name}}" {
+#     capabilities = ["read", "update"]
+# }
 
 # # Allow reading the entity's SSH role configuration
 # path "ssh/roles/{{identity.entity.name}}" {
@@ -14,7 +22,7 @@ path "ssh/sign/{{identity.entity.name}}" {
 
 # Allow access to KV-v2 secrets engine for the entity's tenant-specific path
 # This supports unique paths per tenant under the secrets mount
-path "secrets/data/{{identity.entity.name}}/" {
+path "secrets/data/{{identity.entity.name}}" {
     capabilities = ["create", "read", "update", "delete", "patch"]
 }
 
