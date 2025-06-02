@@ -8,6 +8,7 @@ resource "vault_ssh_secret_backend_role" "this" {
 	allow_user_certificates = true
   #default_user            = "ec2-user"
   allowed_users           = "*"
+  allow_empty_principals = true
   key_type                = "ca"
   ttl                     = "28800"
   max_ttl                 = "28800"

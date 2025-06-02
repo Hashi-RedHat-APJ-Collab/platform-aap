@@ -7,10 +7,10 @@ path "ssh/sign/{{identity.entity.name}}" {
     capabilities = ["read", "update"]
 }
 
-# Allow reading the entity's SSH role configuration
-path "ssh/roles/{{identity.entity.name}}" {
-    capabilities = ["read"]
-}
+# # Allow reading the entity's SSH role configuration
+# path "ssh/roles/{{identity.entity.name}}" {
+#     capabilities = ["read"]
+# }
 
 # Allow access to KV-v2 secrets engine for the entity's tenant-specific path
 # This supports unique paths per tenant under the secrets mount
