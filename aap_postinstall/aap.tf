@@ -44,7 +44,7 @@ resource "aap_job" "config_vault_credentials" {
     "machine_user" : "${var.machine_user}",
     "ssh_public_key": var.unsigned_ssh_public_key,
     "ssh_private_key": var.unsigned_ssh_private_key,
-    "ssh_vault_role" : "ssh_${var.tenant}", # to come from Vault
+    "ssh_vault_role" : "${var.tenant}", # to come from Vault
     "secret_path" : "ssh", # to come from Vault
   })
 

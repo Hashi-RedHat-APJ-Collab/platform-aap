@@ -4,7 +4,7 @@
 
 # Allow access to SSH secrets engine for signing with the entity's role
 path "ssh/sign/{{identity.entity.name}}" {
-    capabilities = ["create", "update"]
+    capabilities = ["read", "update"]
 }
 
 # Allow reading the entity's SSH role configuration

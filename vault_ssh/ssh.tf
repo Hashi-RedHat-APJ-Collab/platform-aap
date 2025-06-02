@@ -4,7 +4,7 @@
 
 resource "vault_ssh_secret_backend_role" "this" {
 	backend                 = "ssh"
-	name                    = var.ssh_role_name
+	name                    = var.tenant
 	allow_user_certificates = true
   #default_user            = "ec2-user"
   allowed_users           = "*"

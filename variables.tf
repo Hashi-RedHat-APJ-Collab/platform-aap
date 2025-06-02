@@ -80,11 +80,11 @@ variable "auth_backend_approle_path" {
   default     = "approle"
 }
 
-variable "ssh_role_name" {
-  description = "Name of the SSH role for AppRole authentication"
-  type        = string
-  default     = "ssh_demo"
-}
+# variable "ssh_role_name" {
+#   description = "Name of the SSH role for AppRole authentication"
+#   type        = string
+#   default     = "ssh_demo"
+# }
 
 # approle_mount_accessor
 variable "approle_mount_accessor" {
