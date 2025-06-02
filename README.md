@@ -47,12 +47,23 @@ Before you begin, ensure you have:
 
 3. Edit `terraform.auto.tfvars` with your specific values:
    ```hcl
-   ami_id            = "ami-xxxxxxxxx"  # From packer build
-   acme_email        = "your-email@example.com"
-   domain_name       = "aap.yourdomain.com"
-   route53_zone_name = "yourdomain.com."
-   aap_username      = "admin"
-   aap_password      = "your-secure-password"
+   create_alb = true
+   ami_id      = "ami-0039772b0345c2e88"
+   aws_region  = "ap-southeast-2"
+   acme_email  = "simon.lynch@hashicorp.com"
+   domain_name = "aap.simon-lynch.sbx.hashidemos.io"
+   subject_alternative_names = [
+     "aap.simon-lynch.sbx.hashidemos.io",
+   ]
+   route53_zone_name = "simon-lynch.sbx.hashidemos.io."
+   aap_username = "admin"
+   aap_password = "Hashi......"
+   job_template_name = "Hashicorp Vault demo setup"
+   vault_namespace = "admin/hashi-redhat"
+   ssh_role_name = "ssh_demo"
+   job_triggers = {
+     "version1" = "4"
+   }
    ```
 
 
