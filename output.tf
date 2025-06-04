@@ -50,6 +50,16 @@ output "private_key_pem" {
   sensitive   = true
 }
 
+output "job_template_static_id" {
+  description = "ID of the AAP job template"
+  value       = module.aap_postinstall.job_template_static_id
+}
+
+output "job_template_var_id" {
+  description = "ID of the AAP job template"
+  value       = module.aap_postinstall.job_template_var_id
+}
+
 # # AAP Configuration outputs
 # output "aap_job_template_id" {
 #   description = "ID of the AAP job template"

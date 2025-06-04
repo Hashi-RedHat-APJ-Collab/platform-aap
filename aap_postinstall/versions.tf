@@ -4,7 +4,7 @@ terraform {
   required_providers {
     aap = {
       source  = "ansible/aap"
-      version = ">= 1.0"
+      version = ">= 1.2"
     }
     tls = {
       source  = "hashicorp/tls"
@@ -14,5 +14,6 @@ terraform {
       source  = "hashicorp/http"
       version = ">= 3.0"
     }
+
   }
 } 

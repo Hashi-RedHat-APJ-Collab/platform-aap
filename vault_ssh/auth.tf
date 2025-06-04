@@ -2,12 +2,11 @@ resource "vault_approle_auth_backend_role" "this" {
   backend         = var.auth_backend_approle_path
   role_name       = var.tenant
   token_policies  = ["aap"]
-
 }
 
 
 resource "vault_approle_auth_backend_role_secret_id" "this" {
-  backend   = var.auth_backend_approle_path
+  backend   = vault_approle_auth_backend_role.this.backend
   role_name = var.tenant
 }
 

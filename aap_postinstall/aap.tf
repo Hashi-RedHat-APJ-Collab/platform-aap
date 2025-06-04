@@ -1,23 +1,16 @@
 locals {
     # ternary operator to set the AAP URL if ALB is created
   aap_url = var.create_alb ? "https://${var.domain_name}" : "http://${var.aap_instance_public_ip}"
-  response_body = jsondecode(data.http.aap_job_template.response_body)
-  template_id = local.response_body.results[0].id
+
 }
 
 
-
-# urlencode the job_template_name
-data "http" "aap_job_template" {
+data "aap_job_template" "vault_config" {
   depends_on = [var.wait_for_healthy_target]
-  url = "${local.aap_url}/api/controller/v2/job_templates/?name=${urlencode(var.job_template_name)}"
-  insecure = true
-
-  request_headers = {
-    Accept        = "application/json"
-    Authorization = "Basic ${base64encode("${var.aap_username}:${var.aap_password}")}"
-  }
+  name = var.job_template_name
+  organization_name = "Default"
 }
+
 
 # tenant: demo
 # organization_name: Default
@@ -30,11 +23,10 @@ data "http" "aap_job_template" {
 
 resource "aap_job" "config_vault_credentials" {
   depends_on = [
-    data.http.aap_job_template,
     var.wait_for_healthy_target
   ]
-            
-  job_template_id = local.template_id
+
+  job_template_id = data.aap_job_template.vault_config.id
   extra_vars      = jsonencode({
     "tenant" : var.tenant, # aligned to Vault
     "organization_name" : "Default",

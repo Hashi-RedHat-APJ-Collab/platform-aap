@@ -20,6 +20,7 @@ variable "job_template_name" {
   default     = "Hashicorp Vault demo setup"
 }
 
+
 variable "aap_username" {
   description = "Username for AAP authentication"
   type        = string
