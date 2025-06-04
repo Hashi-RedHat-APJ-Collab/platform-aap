@@ -36,4 +36,7 @@ resource "aap_job" "config_vault_credentials" {
   })
 
   triggers = var.job_triggers
+
+  wait_for_completion                 = true
+  wait_for_completion_timeout_seconds = 180
 }

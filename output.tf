@@ -51,6 +51,12 @@ output "private_key_pem" {
 }
 
 
+#aap_job_status
+output "aap_job_status" {
+  description = "Status of the AAP job"
+  value       = module.aap_postinstall.aap_job_status
+}
+
 # # AAP Configuration outputs
 # output "aap_job_template_id" {
 #   description = "ID of the AAP job template"

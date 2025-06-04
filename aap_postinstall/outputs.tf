@@ -9,3 +9,7 @@ output "aap_url" {
 }
 
 
+output "aap_job_status" {
+  description = "Status of the AAP job"
+  value       = aap_job.config_vault_credentials.status
+}
