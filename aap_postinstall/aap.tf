@@ -21,10 +21,6 @@ data "aap_job_template" "vault_config" {
 # role_id: $encrypted$
 
 resource "aap_job" "config_vault_credentials" {
-  depends_on = [
-    var.wait_for_healthy_target
-  ]
-
   job_template_id = data.aap_job_template.vault_config.id
   extra_vars      = jsonencode({
     "tenant" : var.tenant, # aligned to Vault

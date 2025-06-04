@@ -28,7 +28,7 @@ module "vault_ssh" {
 
 module "aap_postinstall" {
   source = "./aap_postinstall"
-  depends_on = [ module.aap_instance, module.vault_ssh ] 
+  depends_on = [ module.aap_instance ] 
 
   # Required variables
   domain_name              = var.domain_name
