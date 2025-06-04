@@ -6,7 +6,7 @@ locals {
 
 data "aap_job_template" "vault_config" {
   depends_on = [var.wait_for_healthy_target]
-  name = var.job_template_name
+  name = "Hashicorp Vault demo setup" #var.job_template_name - hard coded due to provider bug see: 
   organization_name = "Default"
 }
 
