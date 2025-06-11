@@ -4,7 +4,6 @@ resource "vault_approle_auth_backend_role" "this" {
   token_policies  = ["aap"]
 }
 
-
 resource "vault_approle_auth_backend_role_secret_id" "this" {
   backend   = vault_approle_auth_backend_role.this.backend
   role_name = var.tenant
