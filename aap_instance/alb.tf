@@ -182,7 +182,7 @@ resource "terraform_data" "wait_for_healthy_target" {
 
         if [ "$status" = "healthy" ]; then
           echo "Target is healthy!"
-          sleep 30
+          sleep 60
           exit 0
         fi
 
