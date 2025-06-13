@@ -70,7 +70,7 @@ Before you begin, ensure you have:
 3. Initialize and apply Terraform:
 
 Today a targeted run is required, once Terraform 1.13 is out we can test deferred changes
-alternative here is split aap module into a second workspace or use Terraform stacks.
+alternative here is split the aap post install module into a second workspace or use Terraform stacks.
 
    ```bash
    terraform init
