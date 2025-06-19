@@ -1,6 +1,6 @@
 # platform-aap
 
-This Terraform project creates an Ansible Automation Platform (AAP) instance on AWS using a modular approach with infrastructure and configuration management separated into distinct modules. The project provides a complete solution for deploying a secure, production-ready AAP environment with HashiCorp Vault integration for SSH key management.
+This Terraform project creates an Ansible Automation Platform (AAP) instance on AWS using a modular approach with infrastructure and configuration management separated into distinct modules. The project provides a complete solution for deploying a single instance contianerized AAP environment with HashiCorp Vault integration for SSH key management.
 
 ## Architecture
 
