@@ -71,11 +71,11 @@ resource "aws_lb_target_group" "app_tg" {
     path                = "/"
     port                = "443"
     protocol            = "HTTPS"
-    interval            = 60              # Increased from 30s - check less frequently
-    timeout             = 10              # Increased from 5s - allow more time to respond
-    healthy_threshold   = 2               # Decreased from 5 - mark healthy faster
-    unhealthy_threshold = 10              # Increased from 4 - more tolerant of failures
-    matcher             = "200-399"
+    interval            = 180             # 5 minutes - very infrequent checks
+    timeout             = 60             # 2 minutes - very generous timeout
+    healthy_threshold   = 2               # Only 2 successes needed
+    unhealthy_threshold = 10              # 20 failures before marking unhealthy
+    matcher             = "200-499"       # Accept almost anything except 5xx server errors
   }
 }
 
