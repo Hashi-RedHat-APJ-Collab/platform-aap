@@ -43,6 +43,8 @@ Before you begin, ensure you have:
 2. Copy the example variables file:
    ```bash
    cp terraform.auto.tfvars.example terraform.auto.tfvars
+   export AAP_USERNAME=admin
+   export AAP_PASSWORD=...
    ```
 
 3. Edit `terraform.auto.tfvars` with your specific values:

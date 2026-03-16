@@ -53,7 +53,7 @@ resource "aws_route_table" "aap_pub_igw" {
 resource "aws_subnet" "aap_public_subnet_az1" {
   vpc_id                  = aws_vpc.aap_vpc.id
   cidr_block              = "10.1.3.0/24"
-  availability_zone       = "ap-southeast-2a"
+  availability_zone       = "${var.aws_region}a"
   map_public_ip_on_launch = true
 
   tags = {
@@ -63,11 +63,11 @@ resource "aws_subnet" "aap_public_subnet_az1" {
   }
 }
 
-# Public Subnet in AZ2 (e.g., ap-southeast-2b)
+# Public Subnet in AZ2 (e.g., ${var.aws_region}b)
 resource "aws_subnet" "aap_public_subnet_az2" {
   vpc_id                  = aws_vpc.aap_vpc.id
   cidr_block              = "10.1.4.0/24"
-  availability_zone       = "ap-southeast-2b"
+  availability_zone       = "${var.aws_region}b"
   map_public_ip_on_launch = true
 
   tags = {
