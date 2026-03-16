@@ -71,7 +71,7 @@ variable "job_triggers" {
 variable "vault_namespace" {
   description = "Vault namespace for the vault_ssh module"
   type        = string
-  default     = "admin/aap-vault-demo"
+  default     = "admin/hashi-redhat"
 }
 
 variable "auth_backend_approle_path" {

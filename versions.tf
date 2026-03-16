@@ -35,10 +35,10 @@ terraform {
 
   cloud {
 
-    organization = "pranit-tf-org"
+    organization = "Hashi-RedHat-APJ-Collab"
 
     workspaces {
-      name = "aap-platform-tf-demo"
+      name = "aap-demo-test"
     }
   }
 
